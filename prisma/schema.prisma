@@ -1,0 +1,102 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum PostCategory {
+  LOVE_LETTER
+  NIGHT_TALK
+  REFLECTION
+  DIARY
+  MILESTONE
+  INTRODUCTION
+}
+
+model User {
+  id                    String     @id @default(cuid())
+  name                  String
+  email                 String     @unique
+  passwordHash          String     @map("password_hash")
+  role                  Role       @default(USER)
+  emailRemindersEnabled Boolean    @default(true) @map("email_reminders_enabled")
+  createdAt             DateTime   @default(now()) @map("created_at")
+  updatedAt             DateTime   @updatedAt @map("updated_at")
+  reminders             Reminder[]
+
+  @@map("users")
+}
+
+model Post {
+  id          String       @id @default(cuid())
+  title       String
+  slug        String       @unique
+  contentEn   String       @map("content_en") @db.Text
+  contentBg   String?      @map("content_bg") @db.Text
+  category    PostCategory @default(REFLECTION)
+  publishedAt DateTime     @map("published_at")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@index([publishedAt])
+  @@index([category])
+  @@map("posts")
+}
+
+model Photo {
+  id          String     @id @default(cuid())
+  url         String
+  storagePath String     @map("storage_path")
+  dateTaken   DateTime?  @map("date_taken")
+  caption     String?
+  album       String?
+  width       Int?
+  height      Int?
+  location    Location?  @relation(fields: [locationId], references: [id])
+  locationId  String?    @map("location_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  reminders   Reminder[]
+
+  @@index([dateTaken])
+  @@index([locationId])
+  @@map("photos")
+}
+
+model Location {
+  id          String    @id @default(cuid())
+  name        String
+  lat         Float
+  lng         Float
+  description String?   @db.Text
+  visitDate   DateTime? @map("visit_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  photos      Photo[]
+
+  @@map("locations")
+}
+
+model Reminder {
+  id           String    @id @default(cuid())
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String    @map("user_id")
+  photo        Photo     @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photoId      String    @map("photo_id")
+  reminderDate DateTime  @map("reminder_date")
+  sent         Boolean   @default(false)
+  sentAt       DateTime? @map("sent_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  @@index([reminderDate, sent])
+  @@map("reminders")
+}

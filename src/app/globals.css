@@ -2,26 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #fefdf8;
+    --foreground: #1a1a2e;
+    --card: #ffffff;
+    --card-foreground: #1a1a2e;
+    --muted: #f5f0e8;
+    --muted-foreground: #6b5e4f;
+    --border: #e8dfd2;
+    --accent: #ab1f49;
+    --accent-foreground: #ffffff;
+    --gold: #d69a1e;
+  }
+
+  .dark {
+    --background: #0f0a15;
+    --foreground: #f5f0e8;
+    --card: #1a1228;
+    --card-foreground: #f5f0e8;
+    --muted: #251c34;
+    --muted-foreground: #9b8eb0;
+    --border: #2d2340;
+    --accent: #df4b74;
+    --accent-foreground: #ffffff;
+    --gold: #ecc95b;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", Georgia, serif;
+  }
+
+  ::selection {
+    background-color: rgba(171, 31, 73, 0.2);
+    color: inherit;
+  }
+
+  .dark ::selection {
+    background-color: rgba(223, 75, 116, 0.3);
+  }
+}
+
+@layer components {
+  .prose-diary {
+    @apply leading-relaxed text-base;
+  }
+
+  .prose-diary p {
+    @apply mb-6;
+  }
+
+  .prose-diary p:first-of-type::first-letter {
+    @apply text-5xl font-serif float-left mr-3 mt-1 leading-none text-burgundy-700 dark:text-burgundy-400;
+  }
+
+  .glass {
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-white/10;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .animate-in {
+    animation: fadeSlideIn 0.6s ease-out forwards;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }
