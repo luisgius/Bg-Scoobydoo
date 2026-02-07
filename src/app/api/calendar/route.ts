@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+
 import { startOfMonth, endOfMonth, format } from "date-fns";
 
 export async function GET(req: NextRequest) {
