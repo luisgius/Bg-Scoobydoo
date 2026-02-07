@@ -11,6 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { formatDate } from "@/lib/utils";
 import { CATEGORIES } from "@/lib/constants";
+import { Camera, MapPin, CalendarDays, ArrowRight } from "lucide-react";
 import type { Post } from "@/types";
 
 type PostPreview = Pick<Post, "id" | "title" | "slug" | "category" | "publishedAt" | "contentEn">;
@@ -19,6 +20,33 @@ function getCategoryLabel(category: string, language: string) {
   const cat = CATEGORIES.find((c) => c.value === category);
   return language === "bg" ? cat?.labelBg || category : cat?.label || category;
 }
+
+const features = [
+  {
+    icon: Camera,
+    titleEn: "Gallery",
+    titleBg: "Галерия",
+    descEn: "Our favorite moments, captured on camera",
+    descBg: "Нашите любими моменти, заснети на камера",
+    href: "/gallery",
+  },
+  {
+    icon: MapPin,
+    titleEn: "Our Map",
+    titleBg: "Нашата карта",
+    descEn: "The places we've visited together",
+    descBg: "Местата, които посетихме заедно",
+    href: "/map",
+  },
+  {
+    icon: CalendarDays,
+    titleEn: "Calendar",
+    titleBg: "Календар",
+    descEn: "Our story, day by day",
+    descBg: "Нашата история, ден по ден",
+    href: "/calendar",
+  },
+];
 
 export function LandingClient({ posts }: { posts: PostPreview[] }) {
   const { language } = useLanguage();
@@ -30,7 +58,7 @@ export function LandingClient({ posts }: { posts: PostPreview[] }) {
       <HeroSection />
 
       {/* Below-fold: Latest diary entries */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -61,14 +89,14 @@ export function LandingClient({ posts }: { posts: PostPreview[] }) {
                 <Link href={`/diary/${post.slug}`}>
                   <Card hover className="h-full p-6 group">
                     <div className="flex items-center gap-2 mb-3">
-                      <Badge variant="burgundy">
+                      <Badge variant="accent">
                         {getCategoryLabel(post.category, language)}
                       </Badge>
                       <span className="text-xs text-[var(--muted-foreground)]">
                         {formatDate(post.publishedAt)}
                       </span>
                     </div>
-                    <h3 className="font-serif text-xl font-semibold mb-3 group-hover:text-burgundy-600 dark:group-hover:text-burgundy-400 transition-colors">
+                    <h3 className="font-serif text-xl font-semibold mb-3 group-hover:text-[var(--accent)] transition-colors">
                       {post.title}
                     </h3>
                     <p className="text-sm text-[var(--muted-foreground)] line-clamp-3">
@@ -96,80 +124,49 @@ export function LandingClient({ posts }: { posts: PostPreview[] }) {
         </div>
       </section>
 
-      {/* Feature sections */}
-      <section className="py-24 px-4 bg-[var(--muted)]">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl mb-4">&#x1F4F8;</div>
-              <h3 className="font-serif text-2xl font-semibold mb-2">
-                {language === "bg" ? "Галерия" : "Gallery"}
-              </h3>
-              <p className="text-[var(--muted-foreground)] mb-4">
-                {language === "bg"
-                  ? "Нашите любими моменти, заснети на камера"
-                  : "Our favorite moments, captured on camera"}
-              </p>
-              <Link href="/gallery">
-                <Button variant="ghost" size="sm">
-                  {language === "bg" ? "Разгледай" : "Explore"} &rarr;
-                </Button>
-              </Link>
-            </motion.div>
+      {/* Feature sections — alternating panels */}
+      {features.map((feature, i) => {
+        const Icon = feature.icon;
+        const isReversed = i % 2 === 1;
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-center"
-            >
-              <div className="text-4xl mb-4">&#x1F5FA;</div>
-              <h3 className="font-serif text-2xl font-semibold mb-2">
-                {language === "bg" ? "Нашата карта" : "Our Map"}
-              </h3>
-              <p className="text-[var(--muted-foreground)] mb-4">
-                {language === "bg"
-                  ? "Местата, които посетихме заедно"
-                  : "The places we've visited together"}
-              </p>
-              <Link href="/map">
-                <Button variant="ghost" size="sm">
-                  {language === "bg" ? "Разгледай" : "Explore"} &rarr;
-                </Button>
-              </Link>
-            </motion.div>
+        return (
+          <section
+            key={feature.href}
+            className={`py-20 px-4 sm:px-6 lg:px-8 ${i % 2 === 0 ? "bg-[var(--muted)]" : ""}`}
+          >
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, x: isReversed ? 30 : -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className={`flex flex-col md:flex-row items-center gap-12 ${isReversed ? "md:flex-row-reverse" : ""}`}
+              >
+                {/* Icon side */}
+                <div className="flex-shrink-0 flex items-center justify-center w-24 h-24 rounded-full bg-[var(--accent)]/10">
+                  <Icon className="w-12 h-12 text-[var(--accent)]" strokeWidth={1.5} />
+                </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-center"
-            >
-              <div className="text-4xl mb-4">&#x1F4C5;</div>
-              <h3 className="font-serif text-2xl font-semibold mb-2">
-                {language === "bg" ? "Календар" : "Calendar"}
-              </h3>
-              <p className="text-[var(--muted-foreground)] mb-4">
-                {language === "bg"
-                  ? "Нашата история, ден по ден"
-                  : "Our story, day by day"}
-              </p>
-              <Link href="/calendar">
-                <Button variant="ghost" size="sm">
-                  {language === "bg" ? "Разгледай" : "Explore"} &rarr;
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+                {/* Text side */}
+                <div className={`flex-1 ${isReversed ? "text-right md:text-right" : ""} text-center md:text-left`}>
+                  <h3 className="font-serif text-3xl font-semibold mb-3">
+                    {language === "bg" ? feature.titleBg : feature.titleEn}
+                  </h3>
+                  <p className="text-[var(--muted-foreground)] text-lg mb-6 max-w-lg">
+                    {language === "bg" ? feature.descBg : feature.descEn}
+                  </p>
+                  <Link href={feature.href}>
+                    <Button variant="ghost" size="sm" className="gap-2">
+                      {language === "bg" ? "Разгледай" : "Explore"}
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        );
+      })}
 
       <Footer />
     </div>

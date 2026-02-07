@@ -17,7 +17,7 @@ export function PhotoCard({ photo, onClick, index }: PhotoCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.03 }}
-      className="break-inside-avoid mb-4 cursor-pointer group relative overflow-hidden rounded-xl"
+      className="break-inside-avoid mb-4 cursor-pointer group relative overflow-hidden rounded-card"
       onClick={onClick}
     >
       <div className="relative aspect-auto">

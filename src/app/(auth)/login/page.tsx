@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { SITE_NAME } from "@/lib/constants";
+import { Crown } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,9 +43,9 @@ export default function LoginPage() {
   return (
     <div className="w-full max-w-md">
       <div className="text-center mb-8">
-        <span className="text-5xl mb-4 block">&#x1F451;</span>
+        <Crown className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" strokeWidth={1} />
         <h1 className="font-serif text-3xl font-bold text-white mb-2">{SITE_NAME}</h1>
-        <p className="text-burgundy-300/70 text-sm">
+        <p className="text-white/50 text-sm">
           A private space for our love story
         </p>
       </div>

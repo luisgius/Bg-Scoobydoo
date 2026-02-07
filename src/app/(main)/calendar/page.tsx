@@ -38,7 +38,7 @@ export default function CalendarPage() {
 
   return (
     <PageTransition>
-      <div className="max-w-5xl mx-auto px-4 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
             {language === "bg" ? "Календар на спомените" : "Memory Calendar"}
@@ -50,11 +50,11 @@ export default function CalendarPage() {
           </p>
           <div className="flex items-center justify-center gap-4 mt-4 text-sm">
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-burgundy-500" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent)]" />
               {language === "bg" ? "Дневник" : "Diary"}
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-gold-500" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--copper)]" />
               {language === "bg" ? "Снимки" : "Photos"}
             </span>
           </div>

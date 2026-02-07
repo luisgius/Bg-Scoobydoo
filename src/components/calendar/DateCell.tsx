@@ -25,7 +25,7 @@ export function DateCell({ day, data, isCurrentMonth, isToday, onClick }: DateCe
         isCurrentMonth
           ? "bg-[var(--card)]"
           : "bg-[var(--muted)]/30 text-[var(--muted-foreground)]",
-        isToday && "ring-2 ring-burgundy-500",
+        isToday && "ring-2 ring-[var(--accent)]",
         hasContent && "cursor-pointer hover:bg-[var(--muted)] hover:shadow-sm",
         !hasContent && "cursor-default"
       )}
@@ -33,7 +33,7 @@ export function DateCell({ day, data, isCurrentMonth, isToday, onClick }: DateCe
       <span
         className={cn(
           "text-sm font-medium",
-          isToday && "text-burgundy-600 dark:text-burgundy-400"
+          isToday && "text-[var(--accent)]"
         )}
       >
         {day}
@@ -42,10 +42,10 @@ export function DateCell({ day, data, isCurrentMonth, isToday, onClick }: DateCe
       {hasContent && (
         <div className="absolute bottom-2 left-2 flex gap-1">
           {hasPosts && (
-            <span className="w-2 h-2 rounded-full bg-burgundy-500" title="Diary entry" />
+            <span className="w-2 h-2 rounded-full bg-[var(--accent)]" title="Diary entry" />
           )}
           {hasPhotos && (
-            <span className="w-2 h-2 rounded-full bg-gold-500" title="Photos" />
+            <span className="w-2 h-2 rounded-full bg-[var(--copper)]" title="Photos" />
           )}
         </div>
       )}

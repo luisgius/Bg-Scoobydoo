@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { NAV_LINKS, ADMIN_NAV_LINKS } from "@/lib/constants";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -44,9 +45,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 className="rounded-full p-2 hover:bg-[var(--muted)] transition-colors"
                 aria-label="Close menu"
               >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="h-5 w-5" />
               </button>
             </div>
 
@@ -59,7 +58,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   className={cn(
                     "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                     pathname === link.href || pathname.startsWith(link.href + "/")
-                      ? "bg-burgundy-100 text-burgundy-800 dark:bg-burgundy-950 dark:text-burgundy-300"
+                      ? "bg-[var(--accent)]/15 text-[var(--accent)]"
                       : "text-[var(--muted-foreground)] hover:bg-[var(--muted)]"
                   )}
                 >
@@ -81,7 +80,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       className={cn(
                         "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                         pathname === link.href
-                          ? "bg-gold-100 text-gold-800 dark:bg-gold-950 dark:text-gold-300"
+                          ? "bg-warm-100 text-warm-800 dark:bg-warm-950 dark:text-warm-300"
                           : "text-[var(--muted-foreground)] hover:bg-[var(--muted)]"
                       )}
                     >
@@ -99,7 +98,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </p>
                 <button
                   onClick={() => signOut({ callbackUrl: "/login" })}
-                  className="text-sm text-burgundy-600 dark:text-burgundy-400 hover:underline"
+                  className="text-sm text-[var(--accent)] hover:underline"
                 >
                   {language === "bg" ? "Изход" : "Sign out"}
                 </button>

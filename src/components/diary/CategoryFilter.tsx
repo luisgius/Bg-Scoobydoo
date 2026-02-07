@@ -18,10 +18,10 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
       <button
         onClick={() => onChange(null)}
         className={cn(
-          "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+          "px-4 py-2 rounded-pill text-sm font-medium transition-all duration-200",
           !selected
-            ? "bg-burgundy-700 text-white dark:bg-burgundy-600"
-            : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-burgundy-100 dark:hover:bg-burgundy-950"
+            ? "bg-[var(--accent)] text-white"
+            : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-[var(--accent)]/10"
         )}
       >
         {language === "bg" ? "Всички" : "All"}
@@ -31,10 +31,10 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
           key={cat.value}
           onClick={() => onChange(cat.value as PostCategory)}
           className={cn(
-            "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+            "px-4 py-2 rounded-pill text-sm font-medium transition-all duration-200",
             selected === cat.value
-              ? "bg-burgundy-700 text-white dark:bg-burgundy-600"
-              : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-burgundy-100 dark:hover:bg-burgundy-950"
+              ? "bg-[var(--accent)] text-white"
+              : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-[var(--accent)]/10"
           )}
         >
           {language === "bg" ? cat.labelBg : cat.label}

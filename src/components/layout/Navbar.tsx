@@ -10,6 +10,7 @@ import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 import { cn } from "@/lib/utils";
+import { Crown, Menu } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -24,10 +25,8 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl" role="img" aria-label="crown">
-              &#x1F451;
-            </span>
-            <span className="font-serif text-lg font-semibold hidden sm:block group-hover:text-burgundy-600 dark:group-hover:text-burgundy-400 transition-colors">
+            <Crown className="h-6 w-6 text-[var(--accent)]" strokeWidth={1.5} />
+            <span className="font-serif text-lg font-semibold hidden sm:block group-hover:text-[var(--accent)] transition-colors">
               {SITE_NAME}
             </span>
           </Link>
@@ -41,7 +40,7 @@ export function Navbar() {
                 className={cn(
                   "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                   pathname === link.href || pathname.startsWith(link.href + "/")
-                    ? "bg-burgundy-100 text-burgundy-800 dark:bg-burgundy-950 dark:text-burgundy-300"
+                    ? "bg-[var(--accent)]/15 text-[var(--accent)]"
                     : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--muted)]"
                 )}
               >
@@ -56,7 +55,7 @@ export function Navbar() {
                   className={cn(
                     "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                     pathname === link.href
-                      ? "bg-gold-100 text-gold-800 dark:bg-gold-950 dark:text-gold-300"
+                      ? "bg-warm-100 text-warm-800 dark:bg-warm-950 dark:text-warm-300"
                       : "text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--muted)]"
                   )}
                 >
@@ -88,9 +87,7 @@ export function Navbar() {
               className="md:hidden rounded-lg p-2 hover:bg-[var(--muted)] transition-colors"
               aria-label="Open menu"
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <Menu className="h-5 w-5" />
             </button>
           </div>
         </div>

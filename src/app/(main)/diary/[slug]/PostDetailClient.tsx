@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { formatDate } from "@/lib/utils";
 import { CATEGORIES } from "@/lib/constants";
+import { ArrowLeft } from "lucide-react";
 import type { Post } from "@/types";
 
 interface Props {
@@ -28,15 +29,13 @@ export function PostDetailClient({ post }: Props) {
         href="/diary"
         className="inline-flex items-center gap-1 text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-8"
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
+        <ArrowLeft className="w-4 h-4" />
         {language === "bg" ? "Обратно към дневника" : "Back to Diary"}
       </Link>
 
       <header className="mb-10">
         <div className="flex items-center gap-3 mb-4">
-          <Badge variant="burgundy">
+          <Badge variant="accent">
             {language === "bg" ? cat?.labelBg : cat?.label}
           </Badge>
           <time className="text-sm text-[var(--muted-foreground)]">
@@ -46,7 +45,7 @@ export function PostDetailClient({ post }: Props) {
         <h1 className="font-serif text-4xl md:text-5xl font-bold leading-tight mb-2">
           {post.title}
         </h1>
-        <div className="w-16 h-1 bg-gradient-to-r from-burgundy-500 to-gold-500 rounded-full mt-6" />
+        <div className="w-16 h-1 bg-gradient-to-r from-[var(--accent)] to-[var(--copper)] rounded-full mt-6" />
       </header>
 
       <PostContent post={post} />

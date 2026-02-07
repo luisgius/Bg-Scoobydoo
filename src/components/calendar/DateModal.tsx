@@ -38,7 +38,7 @@ export function DateModal({ isOpen, onClose, data }: DateModalProps) {
                     onClick={onClose}
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--muted)] transition-colors"
                   >
-                    <Badge variant="burgundy" className="text-xs">
+                    <Badge variant="accent" className="text-xs">
                       {language === "bg" ? cat?.labelBg : cat?.label}
                     </Badge>
                     <span className="font-medium text-sm">{post.title}</span>

@@ -17,9 +17,9 @@ export function PostContent({ post }: PostContentProps) {
   const paragraphs = content.split("\n\n").filter((p) => p.trim());
 
   return (
-    <div className="prose-diary max-w-none">
+    <div className="prose-diary max-w-none font-body">
       {showFallback && (
-        <div className="mb-6 px-4 py-3 rounded-lg bg-gold-50 dark:bg-gold-950/30 border border-gold-200 dark:border-gold-800 text-sm text-gold-800 dark:text-gold-300">
+        <div className="mb-6 px-4 py-3 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-sm text-[var(--accent)]">
           Bulgarian translation not available yet. Showing English version.
         </div>
       )}

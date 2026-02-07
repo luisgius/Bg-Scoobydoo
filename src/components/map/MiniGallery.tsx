@@ -23,7 +23,7 @@ export function MiniGallery({ photos }: MiniGalleryProps) {
         />
       ))}
       {photos.length > 5 && (
-        <div className="w-14 h-14 rounded-md bg-burgundy-100 dark:bg-burgundy-900 flex items-center justify-center text-xs font-medium flex-shrink-0">
+        <div className="w-14 h-14 rounded-md bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center text-xs font-medium flex-shrink-0">
           +{photos.length - 5}
         </div>
       )}

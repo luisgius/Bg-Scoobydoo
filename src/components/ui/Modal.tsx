@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
+import { X } from "lucide-react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -48,7 +49,7 @@ export function Modal({ isOpen, onClose, children, className, title }: ModalProp
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              "relative w-full max-w-lg rounded-2xl bg-[var(--card)] p-6 shadow-2xl border",
+              "relative w-full max-w-lg rounded-card bg-[var(--card)] p-6 shadow-2xl border",
               className
             )}
           >
@@ -60,9 +61,7 @@ export function Modal({ isOpen, onClose, children, className, title }: ModalProp
                   className="rounded-full p-1 hover:bg-[var(--muted)] transition-colors"
                   aria-label="Close"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <X className="w-5 h-5" />
                 </button>
               </div>
             )}

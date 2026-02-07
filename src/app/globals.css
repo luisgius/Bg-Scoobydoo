@@ -4,29 +4,35 @@
 
 @layer base {
   :root {
-    --background: #fefdf8;
-    --foreground: #1a1a2e;
+    --background: #FAF7F2;
+    --foreground: #2C2520;
     --card: #ffffff;
-    --card-foreground: #1a1a2e;
-    --muted: #f5f0e8;
-    --muted-foreground: #6b5e4f;
-    --border: #e8dfd2;
-    --accent: #ab1f49;
+    --card-foreground: #2C2520;
+    --muted: #F0EBE3;
+    --muted-foreground: #7A6E62;
+    --border: #E5DDD3;
+    --accent: #C5955A;
     --accent-foreground: #ffffff;
-    --gold: #d69a1e;
+    --gold: #C5955A;
+    --rose: #C17B7B;
+    --secondary: #8B6E4E;
+    --copper: #D4A574;
   }
 
   .dark {
-    --background: #0f0a15;
-    --foreground: #f5f0e8;
-    --card: #1a1228;
-    --card-foreground: #f5f0e8;
-    --muted: #251c34;
-    --muted-foreground: #9b8eb0;
-    --border: #2d2340;
-    --accent: #df4b74;
+    --background: #0F0E0D;
+    --foreground: #F5F0E8;
+    --card: #1A1918;
+    --card-foreground: #F5F0E8;
+    --muted: #1F1E1C;
+    --muted-foreground: #9B9088;
+    --border: #2A2725;
+    --accent: #C5955A;
     --accent-foreground: #ffffff;
-    --gold: #ecc95b;
+    --gold: #C5955A;
+    --rose: #C17B7B;
+    --secondary: #8B6E4E;
+    --copper: #D4A574;
   }
 }
 
@@ -38,22 +44,22 @@
   body {
     color: var(--foreground);
     background: var(--background);
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: "Source Serif 4", "Georgia", serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: "Cormorant Garamond", "Georgia", serif;
   }
 
   ::selection {
-    background-color: rgba(171, 31, 73, 0.2);
+    background-color: rgba(197, 149, 90, 0.2);
     color: inherit;
   }
 
   .dark ::selection {
-    background-color: rgba(223, 75, 116, 0.3);
+    background-color: rgba(197, 149, 90, 0.3);
   }
 }
 
@@ -67,7 +73,8 @@
   }
 
   .prose-diary p:first-of-type::first-letter {
-    @apply text-5xl font-serif float-left mr-3 mt-1 leading-none text-burgundy-700 dark:text-burgundy-400;
+    @apply text-5xl font-serif float-left mr-3 mt-1 leading-none;
+    color: var(--accent);
   }
 
   .glass {
@@ -83,6 +90,10 @@
   .animate-in {
     animation: fadeSlideIn 0.6s ease-out forwards;
   }
+
+  .font-body {
+    font-family: "Source Serif 4", "Georgia", serif;
+  }
 }
 
 @keyframes fadeSlideIn {
@@ -93,6 +104,15 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
 
@@ -112,4 +132,12 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

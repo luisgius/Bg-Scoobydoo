@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ParallaxImage } from "./ParallaxImage";
 import { AnimatedSubtitle } from "./AnimatedSubtitle";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { Crown, ChevronDown } from "lucide-react";
 
 export function HeroSection() {
   const { language } = useLanguage();
@@ -18,19 +19,19 @@ export function HeroSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="text-6xl md:text-7xl block mb-6">&#x1F451;</span>
+          <Crown className="h-16 w-16 mx-auto mb-6 text-[var(--accent)]" strokeWidth={1} />
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 text-balance"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 text-balance tracking-tight"
         >
           {language === "bg" ? "Моята Българска Принцеса" : "My Bulgarian Princess"}
         </motion.h1>
 
-        <div className="text-lg md:text-xl text-white/70 font-light tracking-wide">
+        <div className="text-lg md:text-xl text-white/60 font-light tracking-wide">
           <AnimatedSubtitle
             text={
               language === "bg"
@@ -55,9 +56,7 @@ export function HeroSection() {
             <span className="text-xs tracking-widest uppercase">
               {language === "bg" ? "Превъртете" : "Scroll"}
             </span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
+            <ChevronDown className="w-5 h-5" strokeWidth={1.5} />
           </motion.div>
         </motion.div>
       </div>

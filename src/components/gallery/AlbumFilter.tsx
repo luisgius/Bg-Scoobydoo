@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 interface AlbumFilterProps {
   albums: string[];
@@ -9,6 +10,8 @@ interface AlbumFilterProps {
 }
 
 export function AlbumFilter({ albums, selected, onChange }: AlbumFilterProps) {
+  const { language } = useLanguage();
+
   if (albums.length === 0) return null;
 
   return (
@@ -16,23 +19,23 @@ export function AlbumFilter({ albums, selected, onChange }: AlbumFilterProps) {
       <button
         onClick={() => onChange(null)}
         className={cn(
-          "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+          "px-4 py-2 rounded-pill text-sm font-medium transition-all duration-200",
           !selected
-            ? "bg-burgundy-700 text-white dark:bg-burgundy-600"
-            : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-burgundy-100 dark:hover:bg-burgundy-950"
+            ? "bg-[var(--accent)] text-white"
+            : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-[var(--accent)]/10"
         )}
       >
-        All
+        {language === "bg" ? "Всички" : "All"}
       </button>
       {albums.map((album) => (
         <button
           key={album}
           onClick={() => onChange(album)}
           className={cn(
-            "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+            "px-4 py-2 rounded-pill text-sm font-medium transition-all duration-200",
             selected === album
-              ? "bg-burgundy-700 text-white dark:bg-burgundy-600"
-              : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-burgundy-100 dark:hover:bg-burgundy-950"
+              ? "bg-[var(--accent)] text-white"
+              : "bg-[var(--muted)] text-[var(--muted-foreground)] hover:bg-[var(--accent)]/10"
           )}
         >
           {album}
