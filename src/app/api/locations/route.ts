@@ -4,8 +4,7 @@ import { auth } from "@/lib/auth";
 import { locationSchema } from "@/lib/validations";
 
 export async function GET() {
-  const session = await auth();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // Auth temporarily disabled
 
   const locations = await prisma.location.findMany({
     include: { photos: true },
